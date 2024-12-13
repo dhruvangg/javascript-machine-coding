@@ -39,9 +39,3 @@ Imagine you have **10,000 records** to display in a web app. How can you:
 - Tests your ability to optimize rendering and manage DOM efficiently.  
 - Challenges you to balance functionality and performance.  
 - Demonstrates knowledge of core JavaScript and browser mechanics.  
-
----
-
-Have you faced this question in an interview, or built a virtualized list in your projects? Let’s discuss your experience below! 💬  
-
-#JavaScript #FrontendDevelopment #MachineCoding #Virtualization #WebPerformance
