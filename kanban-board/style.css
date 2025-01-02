@@ -1,0 +1,97 @@
+
+
+:root {
+    --primary-color: #a31621ff;
+    --secondary-color: #f2af29ff;
+    --tertiary-color: #e0e0ceff;
+    --quaternary-color: #031926ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+header {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+    padding: 0.5rem 0;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.column {
+    background-color: var(--tertiary-color);
+    color: var(--quaternary-color);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.column > h2 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--quaternary-color);
+}
+
+.task-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.task-form input[type="text"] {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--quaternary-color);
+    margin-right: 0.5rem;
+}
+
+.task-form button {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
+    cursor: pointer;
+}
+.task-form button:hover {
+    box-shadow: inset 0 0 2px var(--quaternary-color);
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    /* overflow-y: scroll; */
+    /* max-height: 400px; */
+    height: 100%;
+}
+
+.task-list div {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--quaternary-color);
+    cursor: pointer;
+}
