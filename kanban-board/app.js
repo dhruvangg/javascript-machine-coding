@@ -1,56 +1,68 @@
-const taskInput = document.querySelector("#taskInput");
+class KanbanBoard {
+    constructor(createTaskForm, createTaskInput, columns) {
+        this.createTaskForm = document.querySelector(createTaskForm);
+        this.createTaskInput = document.querySelector(createTaskInput);
+        this.columns = document.querySelectorAll(columns);
 
-document.querySelector(".task-form").addEventListener('submit', (event) => {
-    event.preventDefault()
+        this.draggedTask = null;
 
-    const task = taskInput.value.trim();
+        this.initialize();
+    }
 
-    if (task) {
+    initialize() {
+        this.createTaskForm.addEventListener('submit', (event) => this.handleTaskCreate(event));
+
+        this.columns.forEach((column) => {
+            column.addEventListener('dragover', (event) => this.handleDragOver(event));
+            column.addEventListener('drop', (event) => this.handleDrop(event));
+        })
+    }
+
+    handleTaskCreate(event) {
+        event.preventDefault();
+        const task = this.createTaskInput.value.trim();
+        if (task) {
+            const taskElement = this.createTaskElement(task)
+            this.columns[0].appendChild(taskElement);
+            this.createTaskInput.value = '';
+        }
+    }
+
+    createTaskElement(task) {
         const taskElement = document.createElement('div');
         taskElement.className = 'task';
         taskElement.textContent = task;
         taskElement.draggable = true;
-        document.querySelector('#backlog').appendChild(taskElement);
-        taskInput.value = '';
 
-        taskElement.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text/plain', task);
-        });
+        taskElement.addEventListener('dragstart', (event) => this.handleDragStart(event));
+        taskElement.addEventListener('dragend', (event) => this.handleDragEnd(event));
 
-        taskElement.addEventListener('dragend', (event) => {
-            event.dataTransfer.clearData();
-            document.querySelector('#backlog').removeChild(taskElement);
-        });
+        return taskElement;
     }
-});
 
-document.querySelectorAll(".task-list").forEach(list => {
-    list.addEventListener('dragover', (event) => {
+    handleDragStart(event) {
+        this.draggedTask = event.target;
+        event.dataTransfer.setData('text/plain', event.target.textContent);
+    }
+
+    handleDragEnd(event) {
+        event.dataTransfer.clearData();
+    }
+
+    handleDragOver(event) {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move';
-    });
+    }
 
-    list.addEventListener('drop', (event) => {
+    handleDrop(event) {
         event.preventDefault();
-        const taskElement = document.createElement('div');
-        taskElement.className = 'task';
-        
-        taskElement.textContent = event.dataTransfer.getData('text/plain');
-        taskElement.draggable = true;
-        list.appendChild(taskElement);
+        const taskContent = event.dataTransfer.getData('text/plain');
+        if (taskContent && this.draggedTask) {
+            const taskElement = this.createTaskElement(taskContent)
+            event.target.appendChild(taskElement);
+            this.draggedTask.remove()
+        }
+    }
+}
 
-
-        taskElement.addEventListener('dragstart', (event) => {            
-            event.dataTransfer.setData('text/plain', event.target.textContent);
-        });
-
-        taskElement.addEventListener('dragend', (event) => {
-            event.dataTransfer.clearData();
-            list.removeChild(taskElement);
-        });
-    });
-
-    list.addEventListener('allowDrop', (event) => {
-        event.preventDefault();
-    });
-});
+export default KanbanBoard
