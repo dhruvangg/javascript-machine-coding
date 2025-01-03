@@ -51,6 +51,7 @@ class KanbanBoard {
 
     handleDragOver(event) {
         event.preventDefault();
+        event.target.classList.add('over');
         event.dataTransfer.dropEffect = 'move';
     }
 

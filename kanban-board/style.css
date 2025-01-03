@@ -38,6 +38,7 @@ h1 {
     max-width: 100%;
     width: 1200px;
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .column {
@@ -95,4 +96,14 @@ h1 {
     padding: 0.75rem;
     border-bottom: 1px solid var(--quaternary-color);
     cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .board-container {
+        grid-template-columns: 1fr;
+    }
+
+    .kanban-columns {
+        min-height: 100px;
+    }
 }
