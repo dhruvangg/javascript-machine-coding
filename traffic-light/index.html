@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            background-color: #000;
+            width: max-content;
+        }
+
+        .wrapper>div {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <script>
+        let index = 0
+        let interval;
+        const elements = Array.from(document.querySelectorAll(".wrapper > div"))
+        const config = [{
+            color: "#F00",
+            time: 10000
+        }, {
+            color: "#FF0",
+            time: 500
+        }, {
+            color: "#0F0",
+            time: 5000
+        }]
+
+        function runTrafficLight() {
+            setInterval(() => {
+                
+            }, 300);
+        }
+
+        (function () {
+            elements[index].style.backgroundColor = config[index].color
+            runTrafficLight()
+        })()
+
+    </script>
+</body>
+
+</html>

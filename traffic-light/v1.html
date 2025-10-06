@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            background-color: #000;
+            width: max-content;
+        }
+
+        .wrapper > div {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            margin: 10px;
+            border-radius: 50%;
+        }
+
+        .wrapper > div:first-child.active {
+            background-color: #F00;
+        }
+        .wrapper > div:nth-child(2).active {
+            background-color: #FF0;
+        }
+        .wrapper > div:last-child.active {
+            background-color: #0F0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="active"></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <script>
+        function activeNext(){
+            const active = document.querySelector(".wrapper > div.active");
+            active.classList.remove("active");
+            if (active.nextElementSibling) {
+                active.nextElementSibling.classList.add("active");
+            } else {
+                active.parentElement.firstElementChild.classList.add("active");
+            }
+        }
+
+        setInterval(activeNext, 3000);
+    </script>
+</body>
+</html>
